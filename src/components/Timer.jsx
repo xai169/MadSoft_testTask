@@ -5,9 +5,13 @@ import '../main.css';
 
 const Timer = () => {
   const dispatch = useDispatch();
-  const [time, setTime] = useState(15 * 60);
+  // Используйте localStorage для сохранения состояния времени
+  const [time, setTime] = useState(localStorage.getItem('quizTimer') || 15 * 60);
 
   useEffect(() => {
+    // Сохранение времени в localStorage при каждом обновлении
+    localStorage.setItem('quizTimer', time);
+
     if (time <= 0) {
       dispatch(calculateResults());
       return;
