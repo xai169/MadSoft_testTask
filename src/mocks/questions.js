@@ -7,15 +7,15 @@ export const questions = [
   },
   {
     type: 'multiSelect',
-    question: 'Which of the following are fruits?',
-    options: ['Apple', 'Carrot', 'Banana', 'Potato'],
-    correctAnswer: ['Apple', 'Banana'],
+    question: 'Какие из следующих технологий используются в веб-программировании?',
+    options: ['HTML', 'CSS', 'Python', 'JavaScript'],
+    correctAnswer: ['HTML', 'CSS'],
   },
   {
     type: 'multiSelect',
-    question: 'Which of the following are fruits?',
-    options: ['Apple', 'Carrot', 'Banana', 'Potato'],
-    correctAnswer: ['Apple', 'Banana'],
+    question: 'Какие из перечисленных ниже являются популярными фреймворками JavaScript для веб-разработки?',
+    options: ['React', 'Django', 'Vue.js', 'Angular'],
+    correctAnswer: ['React', 'Vue.js'],
   },
   {
     question: 'Назовите один из основных языков программирования для веб-разработки.',
