@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/MadSoft_testTask/static/css/main.34053099.css",
-    "main.js": "/MadSoft_testTask/static/js/main.1667cf91.js",
+    "main.js": "/MadSoft_testTask/static/js/main.101d479d.js",
     "index.html": "/MadSoft_testTask/index.html",
     "main.34053099.css.map": "/MadSoft_testTask/static/css/main.34053099.css.map",
-    "main.1667cf91.js.map": "/MadSoft_testTask/static/js/main.1667cf91.js.map"
+    "main.101d479d.js.map": "/MadSoft_testTask/static/js/main.101d479d.js.map"
   },
   "entrypoints": [
     "static/css/main.34053099.css",
-    "static/js/main.1667cf91.js"
+    "static/js/main.101d479d.js"
   ]
 }
