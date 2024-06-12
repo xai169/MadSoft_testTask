@@ -22,6 +22,24 @@ const MultipleChoice = ({ options, selectedOption, handleOptionChange }) => (
   </div>
 );
 
+const MultiSelect = ({ options, selectedOptions, handleOptionChange }) => (
+  <div className="options">
+    {options.map((option, index) => (
+      <div key={index} className="option">
+        <input
+          type="checkbox"
+          id={`option${index}`}
+          name="option"
+          value={option}
+          checked={selectedOptions.includes(option)}
+          onChange={handleOptionChange}
+        />
+        <label htmlFor={`option${index}`}>{option}</label>
+      </div>
+    ))}
+  </div>
+);
+
 const ShortAnswer = ({ shortAnswer, handleShortAnswerChange }) => (
   <div className="short-answer">
     <input
@@ -47,17 +65,20 @@ const QuestionSlide = () => {
   const dispatch = useDispatch();
   const { questions, currentQuestionIndex, answers } = useSelector((state) => state.quiz);
   const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [shortAnswer, setShortAnswer] = useState('');
   const [longAnswer, setLongAnswer] = useState('');
 
   useEffect(() => {
-    // Load answers from localStorage
     const storedAnswers = JSON.parse(localStorage.getItem('answers')) || {};
     if (questions.length > 0) {
       const currentAnswer = storedAnswers[currentQuestionIndex] || answers[currentQuestionIndex] || '';
       switch (questions[currentQuestionIndex].type) {
         case 'multipleChoice':
           setSelectedOption(currentAnswer);
+          break;
+        case 'multiSelect':
+          setSelectedOptions(currentAnswer);
           break;
         case 'shortAnswer':
           setShortAnswer(currentAnswer);
@@ -84,6 +105,10 @@ const QuestionSlide = () => {
         answer = selectedOption;
         dispatch(setAnswer(answer));
         break;
+      case 'multiSelect':
+        answer = selectedOptions;
+        dispatch(setAnswer(answer));
+        break;
       case 'shortAnswer':
         answer = shortAnswer;
         dispatch(setAnswer(answer));
@@ -105,6 +130,7 @@ const QuestionSlide = () => {
     }
 
     setSelectedOption('');
+    setSelectedOptions([]);
     setShortAnswer('');
     setLongAnswer('');
   };
@@ -112,6 +138,16 @@ const QuestionSlide = () => {
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
     saveAnswerToLocalStorage(currentQuestionIndex, e.target.value);
+  };
+
+  const handleMultipleOptionChange = (e) => {
+    const value = e.target.value;
+    const newSelectedOptions = selectedOptions.includes(value)
+      ? selectedOptions.filter(option => option !== value)
+      : [...selectedOptions, value];
+
+    setSelectedOptions(newSelectedOptions);
+    saveAnswerToLocalStorage(currentQuestionIndex, newSelectedOptions);
   };
 
   const handleShortAnswerChange = (e) => {
@@ -139,6 +175,13 @@ const QuestionSlide = () => {
           handleOptionChange={handleOptionChange} 
         />
       )}
+      {currentQuestion.type === 'multiSelect' && (
+        <MultiSelect 
+          options={currentQuestion.options} 
+          selectedOptions={selectedOptions} 
+          handleOptionChange={handleMultipleOptionChange} 
+        />
+      )}
       {currentQuestion.type === 'shortAnswer' && (
         <ShortAnswer 
           shortAnswer={shortAnswer} 
@@ -151,7 +194,7 @@ const QuestionSlide = () => {
           handleLongAnswerChange={handleLongAnswerChange} 
         />
       )}
-      <button className="next-button" onClick={handleNextQuestion} disabled={!selectedOption && !shortAnswer && !longAnswer}>
+      <button className="next-button" onClick={handleNextQuestion} disabled={!selectedOption && !shortAnswer && !longAnswer && selectedOptions.length === 0}>
         {currentQuestionIndex < questions.length - 1 ? 'Следующий вопрос' : 'Отправить'}
       </button>
     </div>

@@ -6,6 +6,18 @@ export const questions = [
     correctAnswer: 'HTML, CSS и JavaScript.'
   },
   {
+    type: 'multiSelect',
+    question: 'Which of the following are fruits?',
+    options: ['Apple', 'Carrot', 'Banana', 'Potato'],
+    correctAnswer: ['Apple', 'Banana'],
+  },
+  {
+    type: 'multiSelect',
+    question: 'Which of the following are fruits?',
+    options: ['Apple', 'Carrot', 'Banana', 'Potato'],
+    correctAnswer: ['Apple', 'Banana'],
+  },
+  {
     question: 'Назовите один из основных языков программирования для веб-разработки.',
     type: 'shortAnswer',
     correctAnswer: 'JavaScript'
