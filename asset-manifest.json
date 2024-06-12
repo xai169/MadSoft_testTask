@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/MadSoft_testTask/static/css/main.34053099.css",
+    "main.js": "/MadSoft_testTask/static/js/main.1667cf91.js",
+    "index.html": "/MadSoft_testTask/index.html",
+    "main.34053099.css.map": "/MadSoft_testTask/static/css/main.34053099.css.map",
+    "main.1667cf91.js.map": "/MadSoft_testTask/static/js/main.1667cf91.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.34053099.css",
+    "static/js/main.1667cf91.js"
+  ]
+}
